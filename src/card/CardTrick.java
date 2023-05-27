@@ -4,28 +4,60 @@
  */
 package card;
 
-/**
- * A class that fills a magic hand of 7 cards with random Card Objects
- * and then asks the user to pick a card and searches the array of cards
- * for the match to the user's card. To be used as starting code in ICE 1
- * @author srinivsi
- */
+import java.util.Scanner;
+
 public class CardTrick {
     
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Card[] magicHand = new Card[7];
+        int[] randomValues = new int[7]; // Array to store random values
         
-        for (int i=0; i<magicHand.length; i++)
-        {
+        for (int i = 0; i < magicHand.length; i++) {
             Card c = new Card();
-            //c.setValue(insert call to random number generator here)
-            //c.setSuit(Card.SUITS[insert call to random number between 0-3 here])
+            
+            // Set random value for the card and store it in the array
+            int randomValue = (int) (Math.random() * 13) + 1;
+            randomValues[i] = randomValue;
+            c.setValue(randomValue);
+            System.out.println(randomValue);
+            
+            // Set random suit for the card
+            int randomSuitIndex = (int) (Math.floor(Math.random() * 4));
+            c.setSuit(Card.SUITS[randomSuitIndex]);
+            System.out.println(randomSuitIndex);
+            
+            magicHand[i] = c;
         }
         
-        //insert code to ask the user for Card value and suit, create their card
-        // and search magicHand here
-        //Then report the result here
+        // Ask the user to enter card value and suit
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your card value (1-13): ");
+        int userValue = scanner.nextInt();
+        
+        System.out.println("Enter your card suit (Hearts, Diamonds, Spades, Clubs): ");
+        String userSuit = scanner.next();
+        
+        // Create user's card
+        Card userCard = new Card();
+        userCard.setValue(userValue);
+        userCard.setSuit(userSuit);
+        
+        // Search for the user's card value in randomValues
+        boolean found = false;
+        for (Card card : magicHand) {
+            if (card.getSuit().equalsIgnoreCase(userCard.getSuit()) && card.getValue() == userCard.getValue()){
+                found = true;
+                break;
+            }
+        }
+        
+        // Report the result
+        if (found) {
+            System.out.println("Congratulations! Your card value is in the magic hand.");
+        } else {
+            System.out.println("Sorry, your card value is not in the magic hand.");
+        }
+        
+        scanner.close();
     }
-    
 }
