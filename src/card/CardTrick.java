@@ -29,6 +29,11 @@ public class CardTrick {
             magicHand[i] = c;
         }
         
+        // Add a hardcoded luckyCard
+        Card luckyCard = new Card();
+        luckyCard.setValue(7);
+        luckyCard.setSuit("Hearts");
+        
         // Ask the user to enter card value and suit
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter your card value (1-13): ");
@@ -45,7 +50,7 @@ public class CardTrick {
         // Search for the user's card value in randomValues
         boolean found = false;
         for (Card card : magicHand) {
-            if (card.getSuit().equalsIgnoreCase(userCard.getSuit()) && card.getValue() == userCard.getValue()){
+            if (card.getSuit().equalsIgnoreCase(userCard.getSuit()) && card.getValue() == userCard.getValue() || luckyCard.getValue() == userCard.getValue() && luckyCard.getSuit().equalsIgnoreCase(userCard.getSuit())){
                 found = true;
                 break;
             }
