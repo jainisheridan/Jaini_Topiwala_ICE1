@@ -21,12 +21,12 @@ public class CardTrick {
             int randomValue = (int) (Math.random() * 13) + 1;
             randomValues[i] = randomValue;
             c.setValue(randomValue);
-            System.out.println(randomValue);
+            //just for info - System.out.println(randomValue);
             
             // Set random suit for the card
             int randomSuitIndex = (int) (Math.floor(Math.random() * 4));
             c.setSuit(Card.SUITS[randomSuitIndex]);
-            System.out.println(randomSuitIndex);
+            //just for info - System.out.println(randomSuitIndex);
             
             magicHand[i] = c;
         }
